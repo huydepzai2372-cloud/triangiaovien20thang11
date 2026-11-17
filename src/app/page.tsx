@@ -242,15 +242,12 @@ export default function Home() {
               </h1>
               <div className="relative mx-auto my-6 h-px w-14 bg-[#BE123C]/35" />
               <p className="relative mx-auto max-w-xl font-serif text-lg leading-8 text-[#651A2E]">
-                Kính gửi Ban Giám hiệu và toàn thể Hội đồng Sư phạm,
+                Kính gửi Ban Giám hiệu và toàn thể Hội đồng Sư phạm trường TH&THCS Bình Sơn,
               </p>
               <p className="relative mx-auto mt-3 max-w-xl text-sm leading-7 text-[#795A60] sm:text-base">
                 Nhân ngày 20/11, xin gửi thầy cô lòng biết ơn chân thành vì
                 những bài học, sự tận tâm và yêu thương đã nâng đỡ chúng em
                 trên hành trình trưởng thành.
-              </p>
-              <p className="relative mt-6 font-serif text-sm italic text-[#A55C6C]">
-                Một tấm thiệp nhỏ, dành riêng cho người bạn quý mến.
               </p>
             </article>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Music2, Pause, Play, Volume2 } from 'lucide-react';
 
 const MUSIC_SOURCE = '/music/cogiaovungcao.m4a';
@@ -9,56 +9,22 @@ const MP3_FALLBACK_SOURCE = '/music/cogiaovungcao.mp3';
 
 export default function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const firstInteractionCleanupRef = useRef<(() => void) | null>(null);
+  const hasInteractedRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.35);
   const [errorMessage, setErrorMessage] = useState('');
 
-  useEffect(() => {
+  const startPlayback = useCallback(async () => {
     const audio = audioRef.current;
 
     if (!audio) {
       return;
     }
 
-    let active = true;
-    audio.volume = 0.35;
-
-    audio.play().catch((error: unknown) => {
-      if (!active) {
-        return;
-      }
-
-      setIsPlaying(false);
-      setErrorMessage(
-        error instanceof DOMException && error.name === 'NotAllowedError'
-          ? 'Trình duyệt chặn tự phát. Nhấn nút phát để nghe nhạc.'
-          : 'Không thể tự phát nhạc. Nhấn nút phát để thử lại.',
-      );
-    });
-
-    return () => {
-      active = false;
-      audio.pause();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume]);
-
-  const togglePlayback = async () => {
-    const audio = audioRef.current;
-
-    if (!audio) {
-      return;
-    }
-
-    if (!audio.paused) {
-      audio.pause();
-      return;
-    }
+    hasInteractedRef.current = true;
+    firstInteractionCleanupRef.current?.();
+    firstInteractionCleanupRef.current = null;
 
     if (
       !audio.canPlayType(MUSIC_TYPE) &&
@@ -84,6 +50,55 @@ export default function BackgroundMusic() {
         );
       }
     }
+  }, []);
+
+  useEffect(() => {
+    const handleFirstInteraction = (event: PointerEvent) => {
+      const target = event.target;
+
+      if (
+        target instanceof Element &&
+        target.closest('[data-music-toggle]')
+      ) {
+        return;
+      }
+
+      if (hasInteractedRef.current) {
+        return;
+      }
+
+      void startPlayback();
+    };
+
+    document.addEventListener('pointerdown', handleFirstInteraction);
+    firstInteractionCleanupRef.current = () =>
+      document.removeEventListener('pointerdown', handleFirstInteraction);
+
+    return () => {
+      document.removeEventListener('pointerdown', handleFirstInteraction);
+      firstInteractionCleanupRef.current = null;
+    };
+  }, [startPlayback]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
+
+  const togglePlayback = async () => {
+    const audio = audioRef.current;
+
+    if (!audio) {
+      return;
+    }
+
+    if (!audio.paused) {
+      audio.pause();
+      return;
+    }
+
+    await startPlayback();
   };
 
   return (
@@ -117,6 +132,7 @@ export default function BackgroundMusic() {
         </div>
         <button
           type="button"
+          data-music-toggle
           onClick={togglePlayback}
           aria-label={isPlaying ? 'Tạm dừng nhạc nền' : 'Phát nhạc nền'}
           className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#BE123C] text-white transition hover:bg-[#A40F34] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#BE123C]"
