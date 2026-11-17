@@ -234,7 +234,7 @@ export default function Home() {
                 Ngày Nhà giáo Việt Nam · 20.11
               </p>
               <h1 className="relative mt-4 font-serif text-4xl font-medium leading-tight tracking-[-0.035em] text-[#5A1428] sm:text-5xl">
-                Một lời tri ân,
+                Một lời tri ân
                 <br />
                 <span className="font-normal italic text-[#BE123C]">
                   gửi người gieo chữ.
@@ -242,10 +242,10 @@ export default function Home() {
               </h1>
               <div className="relative mx-auto my-6 h-px w-14 bg-[#BE123C]/35" />
               <p className="relative mx-auto max-w-xl font-serif text-lg leading-8 text-[#651A2E]">
-                Kính gửi Ban Giám hiệu và toàn thể Hội đồng Sư phạm,
+                Kính gửi Ban Giám hiệu và toàn thể Hội đồng Sư phạm
                 <br />
                 <span className="font-sans text-sm leading-7 text-[#795A60] sm:text-base">
-                  Trường TH&THCS Bình Sơn,
+                  Trường TH&THCS Bình Sơn
                 </span>
               </p>
               <p className="relative mx-auto mt-3 max-w-xl text-sm leading-7 text-[#795A60] sm:text-base">
