@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, Flower2, Search } from 'lucide-react';
 import { useMemo, useRef, useState } from 'react';
 import RosePetalBackground from '@/components/RosePetalBackground';
+import BackgroundMusic from '@/components/BackgroundMusic';
 import { teachers, type Teacher } from '@/data/teachers';
 
 type Recipient = {
@@ -197,6 +198,7 @@ export default function Home() {
   return (
     <main className="relative flex min-h-screen flex-col overflow-hidden text-[#4A1722]">
       <RosePetalBackground />
+      <BackgroundMusic />
 
       <header className="relative z-10 mx-auto flex w-full max-w-5xl items-center justify-between px-5 py-5 sm:px-8">
         <div className="flex items-center gap-3">
