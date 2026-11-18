@@ -539,7 +539,7 @@ export default function Home() {
                     'Cảm ơn người đã gieo những hạt mầm tri thức và yêu thương.'}
                   ”
                 </blockquote>
-                <p className="mt-7 text-[15px] leading-8 text-[#694C53] sm:text-base">
+                <p className="mt-7 text-sm leading-7 text-[#694C53] sm:text-[15px]">
                   {recipient?.teacher?.message ?? fallbackMessage}
                 </p>
                 <p className="mt-7 font-serif text-base italic leading-7 text-[#A55C6C]">
