@@ -1,18 +1,18 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Music2, Pause, Play, Volume2 } from 'lucide-react';
+import { Music2, Pause } from 'lucide-react';
 
 const MUSIC_SOURCE = '/music/cogiaovungcao.m4a';
 const MUSIC_TYPE = 'audio/mp4; codecs="mp4a.40.2"';
 const MP3_FALLBACK_SOURCE = '/music/cogiaovungcao.mp3';
+const DEFAULT_VOLUME = 0.35;
 
 export default function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const firstInteractionCleanupRef = useRef<(() => void) | null>(null);
   const hasInteractedRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(0.35);
   const [errorMessage, setErrorMessage] = useState('');
 
   const startPlayback = useCallback(async () => {
@@ -22,6 +22,7 @@ export default function BackgroundMusic() {
       return;
     }
 
+    audio.volume = DEFAULT_VOLUME;
     hasInteractedRef.current = true;
     firstInteractionCleanupRef.current?.();
     firstInteractionCleanupRef.current = null;
@@ -80,12 +81,6 @@ export default function BackgroundMusic() {
     };
   }, [startPlayback]);
 
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume]);
-
   const togglePlayback = async () => {
     const audio = audioRef.current;
 
@@ -102,7 +97,7 @@ export default function BackgroundMusic() {
   };
 
   return (
-    <aside className="fixed bottom-5 left-5 z-30 w-[min(13rem,calc(100vw-2.5rem))] rounded-2xl border border-[#E8C9CD] bg-[#FFFDFD]/95 p-3 shadow-lg shadow-[#5A1428]/10 backdrop-blur-sm sm:bottom-7 sm:left-8">
+    <aside className="fixed bottom-5 right-5 z-30 sm:bottom-7 sm:right-8">
       <audio
         ref={audioRef}
         loop
@@ -118,52 +113,22 @@ export default function BackgroundMusic() {
         <source src={MP3_FALLBACK_SOURCE} type="audio/mpeg" />
       </audio>
 
-      <div className="flex items-center gap-2.5">
-        <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#FFE4E6] text-[#BE123C]">
-          <Music2 size={17} />
-        </span>
-        <div className="min-w-0 flex-1">
-          <p className="truncate text-xs font-medium text-[#651A2E]">
-            Nhạc nền
-          </p>
-          <p className="text-[10px] text-[#A0787F]">
-            {isPlaying ? 'Đang phát' : 'Nhấn để phát'}
-          </p>
-        </div>
-        <button
-          type="button"
-          data-music-toggle
-          onClick={togglePlayback}
-          aria-label={isPlaying ? 'Tạm dừng nhạc nền' : 'Phát nhạc nền'}
-          className="flex size-9 shrink-0 items-center justify-center rounded-full bg-[#BE123C] text-white transition hover:bg-[#A40F34] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#BE123C]"
-        >
-          {isPlaying ? <Pause size={15} /> : <Play size={15} />}
-        </button>
-      </div>
-
-      <label className="mt-3 flex items-center gap-2 text-[#8A626A]">
-        <Volume2 size={14} className="shrink-0" />
-        <span className="sr-only">Âm lượng nhạc nền</span>
-        <input
-          type="range"
-          min="0"
-          max="1"
-          step="0.05"
-          value={volume}
-          onChange={(event) => {
-            const nextVolume = Number(event.target.value);
-            setVolume(nextVolume);
-
-            if (audioRef.current) {
-              audioRef.current.volume = nextVolume;
-            }
-          }}
-          className="h-1 w-full cursor-pointer accent-[#BE123C]"
-        />
-      </label>
-
+      <button
+        type="button"
+        data-music-toggle
+        onClick={togglePlayback}
+        aria-label={isPlaying ? 'Tắt nhạc nền' : 'Bật nhạc nền'}
+        aria-pressed={isPlaying}
+        title={errorMessage || (isPlaying ? 'Tắt nhạc nền' : 'Bật nhạc nền')}
+        className="flex size-12 items-center justify-center rounded-full border border-white/80 bg-[#BE123C] text-white shadow-lg shadow-[#5A1428]/25 transition hover:scale-105 hover:bg-[#A40F34] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#BE123C] sm:size-14"
+      >
+        {isPlaying ? <Pause size={20} /> : <Music2 size={21} />}
+      </button>
       {errorMessage && (
-        <p aria-live="polite" className="mt-2 text-[10px] leading-4 text-[#9F2341]">
+        <p
+          aria-live="polite"
+          className="absolute bottom-full right-0 mb-3 w-max max-w-[min(18rem,calc(100vw-2rem))] rounded-xl border border-[#E8C9CD] bg-[#FFFDFD] px-3 py-2 text-xs leading-5 text-[#9F2341] shadow-lg"
+        >
           {errorMessage}
         </p>
       )}
