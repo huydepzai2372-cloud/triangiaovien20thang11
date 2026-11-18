@@ -383,5 +383,15 @@ export const teachers: Teacher[] = [
     quote: 'Những trang giấy ngăn nắp lưu giữ nhịp điệu của mái trường.',
     message:
       'Nhân ngày Nhà giáo Việt Nam, chúng em xin gửi chú Bạch Mai Thọ lời tri ân. Công việc văn thư của chú giúp hồ sơ và thông tin nhà trường được sắp xếp cẩn thận. Sự tỉ mỉ ấy góp phần để các hoạt động chung diễn ra thông suốt và đúng lúc. Chúng em trân trọng những đóng góp âm thầm phía sau mỗi trang giấy, thông báo và hồ sơ. Kính chúc chú nhiều sức khỏe, niềm vui và luôn được tập thể yêu quý.',
+  },
+  {
+    id: 'ha-quang-hiep',
+    slug: 'ha-quang-hiep',
+    name: 'Thầy Hà Quang Hiệp',
+    role: 'Giáo viên',
+    department: 'Giáo viên THCS',
+    quote: 'Tiếng chuông rung lên, ý chí học tập cũng theo đó mà lớn dần.',
+    message:
+      'Nhân ngày 20/11, chúng em kính gửi thầy Hà Quang Hiệp lời tri ân chân thành. Những giờ học THCS dưới sự hướng dẫn của thầy luôn mang lại cảm giác gần gũi và đầy hứng thú. Thầy kiên nhẫn giúp chúng em hiểu bài qua cách giảng rõ ràng và khuyến khích chúng em mạnh dạn trao đổi ý kiến. Sự nghiêm túc và công bằng của thầy giúp các bạn thêm tự tin hoàn thành trách nhiệm học tập. Kính chúc thầy nhiều sức khỏe, giữ mãi nhiệt huyết và gặt hái niềm vui trong từng buổi lên lớp.',
   }
 ];

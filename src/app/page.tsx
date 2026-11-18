@@ -245,7 +245,9 @@ export default function Home() {
                 Kính gửi Ban Giám hiệu và toàn thể Hội đồng Sư phạm
                 <br />
                 <span className="font-sans text-sm leading-7 text-[#795A60] sm:text-base">
-                  Trường TH&THCS Bình Sơn
+                  Trường TH&THCS Nật Sơn
+                  <br />
+                  Phân hiệu chính
                 </span>
               </p>
               <p className="relative mx-auto mt-3 max-w-xl text-sm leading-7 text-[#795A60] sm:text-base">
@@ -597,6 +599,9 @@ export default function Home() {
       <footer className="relative z-10 px-5 pb-5 pt-2 text-center">
         <p className="text-[11px] tracking-wide text-[#A0787F]">
           Với lòng biết ơn · 20 tháng 11
+        </p>
+        <p className="mx-auto mt-1 max-w-xl text-[10px] leading-5 text-[#A0787F]">
+          Chức vụ của mỗi giáo viên có thể có sai sót, mong thầy cô thông cảm bỏ qua!
         </p>
       </footer>
     </main>
