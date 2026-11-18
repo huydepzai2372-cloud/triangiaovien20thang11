@@ -584,17 +584,20 @@ export default function Home() {
               </AnimatePresence>
             </div>
 
-            <button
-              type="button"
-              onClick={startOver}
-              className="fixed bottom-5 right-5 z-20 inline-flex items-center gap-1.5 rounded-full border border-[#BE123C]/20 bg-[#FFFDFD]/90 px-4 py-2.5 text-xs font-medium text-[#8F1937] shadow-sm backdrop-blur-sm transition hover:border-[#BE123C]/45 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#BE123C] sm:bottom-7 sm:right-8"
-            >
-              <ArrowLeft size={14} />
-              Nhập lại tên khác
-            </button>
           </motion.section>
         )}
       </AnimatePresence>
+
+      {stage === 'reading' && (
+        <button
+          type="button"
+          onClick={startOver}
+          className="fixed bottom-5 left-5 z-[50] inline-flex min-h-11 cursor-pointer items-center justify-center gap-1.5 rounded-full border border-[#BE123C]/25 bg-[#FFFDFD] px-4 py-2.5 text-xs font-medium text-[#8F1937] shadow-md shadow-[#5A1428]/10 transition hover:border-[#BE123C]/50 hover:bg-white active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#BE123C] sm:bottom-7 sm:left-8"
+        >
+          <ArrowLeft size={14} />
+          Nhập lại tên khác
+        </button>
+      )}
 
       <footer className="relative z-10 px-5 pb-5 pt-2 text-center">
         <p className="text-[11px] tracking-wide text-[#A0787F]">
