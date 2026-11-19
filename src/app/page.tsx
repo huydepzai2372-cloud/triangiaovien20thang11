@@ -245,7 +245,7 @@ export default function Home() {
                 Kính gửi Ban Giám hiệu và toàn thể Hội đồng Sư phạm
                 <br />
                 <span className="font-sans text-sm leading-7 text-[#795A60] sm:text-base">
-                  Trường TH&THCS Nật Sơn
+                  Trường TH&THCS Bình Sơn
                   <br />
                   Phân hiệu chính
                 </span>
